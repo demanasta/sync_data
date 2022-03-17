@@ -2,3 +2,7 @@
 .log_sync/
 *.config
 nohup.out
+sync_data.sh_220313
+sync_data.sh_m
+sync_data.sh_r
+sync_data_manual.sh
