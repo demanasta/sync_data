@@ -1,0 +1,4 @@
+.log_conn/
+.log_sync/
+*.config
+nohup.out
