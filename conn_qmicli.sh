@@ -13,7 +13,7 @@ LOG=.log/conn_$(date -u +%Y%m%d).log
 sudo ifconfig wlan0 down >> ${LOG} 2>&1
 
 #check connection to paliki
-nc -z ${CHECKIP} ${CHECKPORT} >/dev/null 2>&1
+nc -z "${CHECKIP}" "${CHECKPORT}" >/dev/null 2>&1
 checknet=$?
 
 if [ ${checknet} -eq 0 ]
@@ -34,7 +34,7 @@ else
 
 	    echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: ttyUSB exist, start qmicli" >> ${LOG}
     #sleep 60
-    	    sudo socat - /dev/ttyUSB2 <<<'AT+CPIN=${CPIN}'  >> ${LOG}
+    	    sudo socat - /dev/ttyUSB2 <<<'AT+CPIN='${CPIN}  >> ${LOG}
 
 	    qmicli -d /dev/cdc-wdm0 --dms-set-operating-mode='online' >> ${LOG}
 
