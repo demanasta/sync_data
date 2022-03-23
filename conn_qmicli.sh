@@ -1,4 +1,14 @@
 #!/bin/bash
+VERSION="conn_qmicli - v0.1b12"
+
+# ////////////////////////////////////////////////////////////////////////////////
+# HELP FUNCTION
+
+function help {
+  echo " Program Name : conn_qmicli.sh"
+  echo " Version : ${VERSION}"
+ }
+
 #Set bash parameters
 set -o pipefail
 
@@ -66,8 +76,8 @@ else
 	sleep 10
 	    # set wwan0 as default
 	    sudo route add default dev wwan0 >> ${LOG}
-
-	    nc -z ${SHECKIP} ${CHECKPORT} >/dev/null 2>&1
+	    
+	    nc -z "${CHECKIP}" "${CHECKPORT}" >/dev/null 2>&1
 	    checknet=$?
 
 	    if [ ${checknet} -eq 0 ]
