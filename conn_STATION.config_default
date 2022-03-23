@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# set check connection server
+CHECKIP=       #Set server ip to check connection
+CHECKPORT=     #Set server port to check connection [default=22]
+
+# pin for boadband card
+CPIN=          # Set PIN number for mobile card
+
+# APN name
+APNNAME=       #Set APN name
+USERNAME=      # Set username
+USERPASSWD=    #Set password
+
+
+
