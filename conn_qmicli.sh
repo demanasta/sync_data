@@ -32,7 +32,7 @@ else
         if [ -c /dev/ttyUSB0 ] && [ -c /dev/ttyUSB1 ] && [ -c /dev/ttyUSB2 ] && [ -c /dev/ttyUSB3 ] && [ -c /dev/ttyUSB4 ]
 	then
 
-	    echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: ttyUSB exist, start qmicli" >> ${LOG}skdfm
+	    echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: ttyUSB exist, start qmicli" >> ${LOG}
     #sleep 60
     	    sudo socat - /dev/ttyUSB2 <<<'AT+CPIN=${CPIN}'  >> ${LOG}
 

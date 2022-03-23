@@ -1,5 +1,6 @@
 .log_conn/
 .log_sync/
+.log/
 *.config
 nohup.out
 sync_data.sh_220313
