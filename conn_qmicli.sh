@@ -7,6 +7,16 @@ VERSION="conn_qmicli - v0.1b12"
 function help {
   echo " Program Name : conn_qmicli.sh"
   echo " Version : ${VERSION}"
+  echo " Purpose : establish 4G connection"
+  echo " Usage   : conn_qmicli.sh <config file>"
+  echo "--------------------------------------------------------------------------"
+  echo " Authors:"
+  echo "        - Dimitris Anastasiou, dganastasiou@gmail.com"
+  echo "        - Yiannis Karamitros, jkaram@noa.gr"
+  echo "--------------------------------------------------------------------------"
+  echo " History:"
+  echo "   2021.09.21 : Initial beta version"
+  echo "   2022.03.20 : Add config file, documentation, clen code"
  }
 
 #Set bash parameters
@@ -16,6 +26,30 @@ set -o pipefail
 source $1
 
 LOG=.log/conn_$(date -u +%Y%m%d).log
+
+
+# Check if necessary programms exista qmicli
+if ! [ -x "$(command -v qmicli)" ]
+then
+     echo "$(date +%Y.%m.%d_%H:%M:%S) [ERROR]: libqmi-utils is not install " >> ${LOG}   
+     exit 1
+
+fi
+
+# ////////////////////////////////////////////////////////////////////////////////
+# GET CML Arguments
+if [ "$#" == 0 ]
+then
+    echo "[ERROR]: No input file"
+    help
+fi
+
+# TODO get arguments chec if config file exists
+#while [ $# -gt 0 ]
+#do
+#    case "$1" in
+#	conf_file
+#done
 
 #wait
 
@@ -31,6 +65,7 @@ then
     echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Raspberry is online!" >> ${LOG}
     exit 0
 else
+
 
     echo "$(date +%Y.%m.%d_%H:%M:%S) [WRNG]: Raspberry is OFFLINE. Try new connection" >>${LOG}
 
