@@ -35,6 +35,12 @@ then
      exit 1
 
 fi
+# CHeck udhcpc
+if ! [ -x "$(command -v udhcpc)" ]
+then
+     echo "$(date +%Y.%m.%d_%H:%M:%S) [ERROR]: udhcpc is not install " >> ${LOG}   
+     exit 1
+fi
 
 # ////////////////////////////////////////////////////////////////////////////////
 # GET CML Arguments
