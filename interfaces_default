@@ -1,0 +1,25 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+source /etc/network/interfaces.d/*
+
+# The loopback networkinterface
+auto lo
+iface lo inet loopback
+
+# eth0 dhcp interface
+auto eth0
+#allow-hotplug eth0
+iface eth0 inet dhcp
+
+# wlan0 allow wifi dhcp
+#auto wlan0
+#allow-hotplug wlan0
+#iface wlan0 inet manual 
+
+
+# wwan0 static ip
+auto wwan0
+#allow-hotplug wwan0
+iface wwan0 inet static
+address <STATIC_IP> 
+netmask <SET_NETMASK> # default: 255.255.255.0
