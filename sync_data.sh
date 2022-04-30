@@ -86,8 +86,8 @@ checknet=$?
 
 if  [ ${checknet} -ne 0 ]
 then
-    #call run_qmicli
-    cd /home/pi/ && nohup sudo ./run_qmicli_krini.sh
+    #call conn_qmicli using configuration file
+    cd /home/pi/sync_data && nohup sudo ./conn_qmicli.sh ${CONNCONF}
 else
 
 #local_data=$1
@@ -162,8 +162,6 @@ then
 else
     echo "$(date +%Y.%m.%d-%H:%M:%S) [DEBUG]: No new accel data" >>${LOG} 2>&1
 fi
-
-
 
 
 
