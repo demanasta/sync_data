@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
-# Configuration file to send data from station to remote server
+## Configuration file to send data from station to remote server
 
-SITE_NAME="CCCC" # 4-char station/site name/code 
+SITE_NAME="CCCC" ## 4-char station/site name/code 
 
-REM_USER=  # username to connect remote server
-REM_IPADDR="" # IP address for remote server
-REM_PORT=22  #Port for remote server default=22
+REM_USER=  ## username to connect remote server
+REM_IPADDR="" ## IP address for remote server
+REM_PORT=22  ## Port for remote server default=22
 
-# Set folder to remote server for UBX files
+## Set configuration file for net connection
+CONNCONF=conn_<station>.config
+
+## Set folder to remote server for UBX files
 REMUBXFOL=/home/__REM_USER__data/raw_ubx
 
-# Set folder to remote server for Accelerometric data
+## Set folder to remote server for Accelerometric data
 REMACCFOL=/home/__REM_USER__/data/raw_acc
 
-# Set local folders for UBX files
+## Set local folders for UBX files
 RASUBXFOL=/home/pi/gnss/rtkbase/data
 
-# Set local folders for Accelerometric data
+## Set local folders for Accelerometric data
 RASACCFOL=/home/pi/Desktop/Send
