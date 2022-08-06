@@ -171,7 +171,7 @@ then
     /usr/bin/rsync --no-links \
 	       -azP \
 	       -e "ssh" \
-	       ${RASACCFOL}/*  \
+	       ${RASACCFOL}/  \
 	       ${REMSSH}:${REMACCFOL}/ \
 	       --progress
 	       1>>${LOG} 2>&1
