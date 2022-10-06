@@ -178,6 +178,9 @@ then
     if [ $? -eq 0 ]
     then
     	echo "$(date +%Y.%m.%d-%H:%M:%S) [DEBUG]: Accelerometric data transferred " >>${LOG} 2>&1
+	## Remove acc data from Threshold folder after tranfer
+	rm ${RASACCFOL}/*
+        echo "$(date +%Y.%m.%d-%H:%M:%S) [DEBUG]: Accelerometric data deleted from Threshold folder " >>${LOG} 2>&1
     else
     	echo "$(date +%Y.%m.%d-%H:%M:%S) [ERROR]: No data tranfered not transferred " >>${LOG} 2>&1
     fi
