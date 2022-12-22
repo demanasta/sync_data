@@ -142,7 +142,35 @@ else
             ## Check lsusb if router esist
             echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Check lsusb output" >> ${LOG}
             lsusb >>${LOG}
+##---------------------------
+##NEW SOLUTION using modprobe
+##-------------------------------------------------------------------------
+## TODO Add debug mesaages
+  ##---------------------
+  ##SOL1 find the driver
+            ## New solution using modprobe stop and restart sub usb system
+            ## Cat driver name for ttyUSB
+            # drv_name=$(sudo lsmod | grep usbserial | awk '{print $4}')
 
+            ## Unload driver
+            # sudo modprobe -r ${drv_name}
+            # sudo modprobe -r usbserial
+
+            ## Reload driver
+            # sudo modprobe ${drv_name}
+  ##--------------------------
+  ##SOL2 check drive 'option'
+  ##+ check lsmod option drive manage usb_wwan and usbserial
+  ##+ if option stop then all other drives unloded
+            ## Ubload drive
+            sudo modprobe -r option
+
+            ## Reload drive
+            sudo modprobe option
+
+##------------------------------------------------------------------------
+## FINISHED new lines
+##--------------------------
             ## Sleep 5sec add encounter and restart while
     	    sleep 5
     	    let enc++
@@ -150,29 +178,39 @@ else
     done
 
     ## If ttyUSB not exist enable using kmnod and then reboot raspberry
-    echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: enable ttyUSB* runing mknod" >> ${LOG}
-    mknod /dev/ttyUSB0 c 188 0
-    ## Check if ttyUSB exist
+    ##+THis module not working until now! (221222)
+    #    echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: enable ttyUSB* runing mknod" >> ${LOG}
+    #    mknod /dev/ttyUSB0 c 188 0
 
+
+    ## Check if ttyUSB exist
     if [ -c /dev/ttyUSB0 ] && [ -c /dev/ttyUSB1 ] && [ -c /dev/ttyUSB2 ] && [ -c /dev/ttyUSB3 ] && [ -c /dev/ttyUSB4 ]
     then
     	echo "$(date +%Y.%m.%d_%H:%M:%S) [WRNG]: /dev/ttyUSB* exists " >> ${LOG}
         exit 0
     else
 #	    mknod /dev/ttyUSB0 c 188 0
+##---------------------------
+##NEW SOLUTION using modprobe
+##------------------------------------------------------------------------
 
         ## TODO Add new solution to stop all processing before restart the raspberry
         ## list all processing
         # fuser /dev/ttyUSB0
 
         ## if fuser return processing killthem by pid
-        # sudo pkill <fuser returns>
+        sudo fuser -k /dev/ttyUSB2
 
         ## if fuser return nothing then try lsof
         # sudo lsof /def/ttyUSB0
 
         ## kill all returns from lsof
         # sudo pkill <lsof retuns>
+
+
+##-------------------------------------------------------------------------
+## FINISHED new lines
+##--------------------------
 
         ## send lsusb debug to log file
         echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Check lsusb output" >> ${LOG}
