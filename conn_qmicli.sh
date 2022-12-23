@@ -199,6 +199,7 @@ else
         # fuser /dev/ttyUSB0
 
         ## if fuser return processing killthem by pid
+        sudo fuser -k /dev/ttyUSB0
         sudo fuser -k /dev/ttyUSB2
 
         ## if fuser return nothing then try lsof
