@@ -163,9 +163,11 @@ else
   ##+ check lsmod option drive manage usb_wwan and usbserial
   ##+ if option stop then all other drives unloded
             ## Ubload drive
+            echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Close option driver" >> ${LOG}
             sudo modprobe -r option
 
             ## Reload drive
+            echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Enable option driver for usb" >> ${LOG}
             sudo modprobe option
 
 ##------------------------------------------------------------------------
@@ -199,6 +201,7 @@ else
         # fuser /dev/ttyUSB0
 
         ## if fuser return processing killthem by pid
+        echo "$(date +%Y.%m.%d_%H:%M:%S) [DEBUG]: Kill all processings for usb" >> ${LOG}
         sudo fuser -k /dev/ttyUSB0
         sudo fuser -k /dev/ttyUSB2
 
