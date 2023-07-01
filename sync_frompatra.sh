@@ -127,8 +127,10 @@ UCOMPRESS=0
 #if test -f ${REMOTE}/${ubx_file}
 #then
 hod_fname=$(date --date="-1 hour" -u +%Y-%m-%d_%H-)
-ubx_file=${hod_fname}00-00_ASTR.ubx
-echo ${ubx_file}
+ubx_astr=${hod_fname}00-00_ASTR.ubx
+echo ${ubx_astr}
+ubx_gedp=${hod_fname}00-00_GEDP.ubx
+echo ${ubx_gedp}
 
 #for ubx_file in `cd ${RASUBXFOL} && ls ${hod_fname}*_${SITE_NAME}.ubx`
 #do
@@ -139,21 +141,34 @@ echo ${ubx_file}
 #	then
 #           echo "$(date +%Y.%m.%d-%H:%M:%S) [DEBUG]: Compress ${send_file}" >>${LOG} 2>&1
 #	    cd ${RASUBXFOL}
-send_file=${ubx_file}.7z
+load_astr=${ubx_astr}.7z
+load_gedp=${ubx_gedp}.7z
 #	    7z a ${send_file} ${ubx_file}
 #	    cd ${BASEDIR}
 #	else
 #	    send_file=${ubx_file}
 #	fi
 	## Compress the file
+    ## LOAD ASTR
         /usr/bin/rsync --delete \
 	       --no-links \
 	       -azP \
 	       -e "ssh" \
-	       proion@150.140.182.42:/mnt/datas/gpsdata/proion/data/raw_ubx/${send_file}  \
-	       /home/proion/data/raw_ubx/${send_file} \
+	       proion@150.140.182.42:/mnt/datas/gpsdata/proion/data/raw_ubx/${load_astr}  \
+	       /mnt/jkaram/data/raw_ubx/${load_astr} \
 	       --progress
 	       1>>${LOG} 2>&1
+
+    ## LOAD GEDP
+        /usr/bin/rsync --delete \
+	       --no-links \
+	       -azP \
+	       -e "ssh" \
+	       proion@150.140.182.42:/mnt/datas/gpsdata/proion/data/raw_ubx/${load_gedp}  \
+	       /mnt/jkaram/data/raw_ubx/${load_gedp} \
+	       --progress
+	       1>>${LOG} 2>&1
+
 #    if [ $? -eq 0 ]
 #    then
 #	echo "$(date +%Y.%m.%d-%H:%M:%S) [DEBUG]: file ${send_file} transferred " >>${LOG} 2>&1
@@ -175,7 +190,7 @@ send_file=${ubx_file}.7z
 	       -azP \
 	       -e "ssh" \
 	       proion@150.140.182.42:/mnt/datas/gpsdata/proion/data/raw_acc/  \
-	       /home/proion/data/raw_acc/ \
+	       /mnt/jkaram/data/raw_acc/ \
 	       --progress
 	       1>>${LOG} 2>&1
 #    if [ $? -eq 0 ]
